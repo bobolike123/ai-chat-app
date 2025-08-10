@@ -44,6 +44,8 @@ This is an AI-CHAT WEB APP writting by Next.js(React) and TypeScript.
 这是一个使用Next.js(React) 和 TypeScript 编写的AI聊天网页应用。
 ```
 
+![UI界面](images/intro.png)
+
 目前支持的功能：
 
 - 对话聊天（纯文本）

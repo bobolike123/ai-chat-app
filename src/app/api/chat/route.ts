@@ -93,15 +93,21 @@ export async function POST(request: NextRequest) {
       requestBody = {
         model: model,
         prompt: prompt,
-        image: imageUrl || "https://ark-project.tos-cn-beijing.volces.com/doc_image/seedream_i2i.jpeg", // Default image if none provided
         response_format: "url",
-        size: "adaptive",
+        size: "1024x1024",
         seed: 21,
         guidance_scale: 5.5,
         // watermark: true,
         watermark: false,
         stream: false // Image generation doesn't support streaming
       };
+      
+      // Only add image parameter for image editing model, not for text-to-image model
+      if (model === "doubao-seededit-3-0-i2i-250628") {
+        requestBody.image = imageUrl || "https://ark-project.tos-cn-beijing.volces.com/doc_image/seedream_i2i.jpeg"; // Default image if none provided
+        // Remove size parameter for image editing model
+        delete requestBody.size;
+      }
     } else if (provider === "doubao" && (model === "doubao-seedance-1-0-pro-250528" || model === "doubao-seedance-1-0-lite-i2v-250428")) {
       // Doubao video generation models (both text-to-video and image-to-video)
       // Extract the prompt from the last user message

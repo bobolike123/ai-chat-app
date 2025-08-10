@@ -684,6 +684,13 @@ export default function Home() {
     }
   };
 
+  // Function to reset file input to allow selecting the same file again
+  const resetFileInput = (input: HTMLInputElement | null) => {
+    if (input) {
+      input.value = '';
+    }
+  };
+
   // Function to handle video generation
   const handleVideoGeneration = async (params: any) => {
     // Add user message to chat
@@ -2109,7 +2116,11 @@ export default function Home() {
                   <input
                     type="file"
                     accept=".txt,.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileUpload(e.target.files)}
+                    onChange={(e) => {
+                      handleFileUpload(e.target.files);
+                      // Reset the input value to allow selecting the same file again
+                      resetFileInput(e.target);
+                    }}
                     className="absolute top-2 left-2 opacity-0 w-8 h-8 cursor-pointer"
                     id="file-upload"
                     multiple
